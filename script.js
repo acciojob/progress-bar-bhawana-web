@@ -1,46 +1,49 @@
-//your JS code here. If required.
-let currentActive = 1;
+let currentActive = 1;  // Initially, the first circle is active
+
+// Get the circles and buttons
 const circles = document.querySelectorAll('.circle');
 const nextButton = document.getElementById('next');
 const prevButton = document.getElementById('prev');
 
-function updateProgress() {
-    // Update the active class for each circle
-    circles.forEach((circle, index) => {
-        if (index < currentActive) {
-            circle.classList.add('active');
-        } else {
-            circle.classList.remove('active');
-        }
-    });
-
-    // Disable/enable the buttons based on the current active circle
-    if (currentActive === 1) {
-        prevButton.disabled = true;
-    } else {
-        prevButton.disabled = false;
-    }
-
-    if (currentActive === circles.length) {
-        nextButton.disabled = true;
-    } else {
-        nextButton.disabled = false;
-    }
+// Function to update the progress bar
+function updateProgressBar() {
+  // Remove the 'active' class from all circles
+  circles.forEach(circle => {
+    circle.classList.remove('active');
+  });
+  
+  // Add the 'active' class to the current circle
+  const activeCircle = document.getElementById(`circle-${currentActive}`);
+  activeCircle.classList.add('active');
+  
+  // Enable or disable buttons based on the current circle
+  if (currentActive === 1) {
+    prevButton.disabled = true;
+  } else {
+    prevButton.disabled = false;
+  }
+  
+  if (currentActive === circles.length) {
+    nextButton.disabled = true;
+  } else {
+    nextButton.disabled = false;
+  }
 }
 
+// Add event listeners to the buttons
 nextButton.addEventListener('click', () => {
-    if (currentActive < circles.length) {
-        currentActive++;
-        updateProgress();
-    }
+  if (currentActive < circles.length) {
+    currentActive++;
+    updateProgressBar();
+  }
 });
 
 prevButton.addEventListener('click', () => {
-    if (currentActive > 1) {
-        currentActive--;
-        updateProgress();
-    }
+  if (currentActive > 1) {
+    currentActive--;
+    updateProgressBar();
+  }
 });
 
-// Initialize the progress bar
-updateProgress();
+// Initialize the progress bar when the page loads
+updateProgressBar();
