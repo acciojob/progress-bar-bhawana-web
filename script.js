@@ -1,40 +1,52 @@
-// Select DOM elements
+// Selecting elements
 const circles = document.querySelectorAll('.circle');
-const nextButton = document.getElementById('next');
 const prevButton = document.getElementById('prev');
+const nextButton = document.getElementById('next');
 
-let currentActiveIndex = 0;  // Initially, the first circle is active
+// Initialize the progress bar
+let currentActive = 1;
+circles[0].classList.add('active');
 
-// Function to update the active class on circles
-function updateCircles() {
+// Functions to update progress bar and buttons
+function updateProgress() {
+  // Set active class to current circle
   circles.forEach((circle, index) => {
-    if (index <= currentActiveIndex) {
-      circle.classList.add('active');  // Add active class for circles before the current one
+    if (index < currentActive) {
+      circle.classList.add('active');
     } else {
-      circle.classList.remove('active');  // Remove active class for circles after the current one
+      circle.classList.remove('active');
     }
   });
 
-  // Enable/Disable buttons based on the current active index
-  prevButton.disabled = currentActiveIndex === 0;
-  nextButton.disabled = currentActiveIndex === circles.length - 1;
+  // Disable/enable buttons based on currentActive
+  if (currentActive === 1) {
+    prevButton.disabled = true;
+  } else {
+    prevButton.disabled = false;
+  }
+
+  if (currentActive === circles.length) {
+    nextButton.disabled = true;
+  } else {
+    nextButton.disabled = false;
+  }
 }
 
-// Event listener for "Next" button
+// Next button functionality
 nextButton.addEventListener('click', () => {
-  if (currentActiveIndex < circles.length - 1) {
-    currentActiveIndex++;
-    updateCircles();
+  if (currentActive < circles.length) {
+    currentActive++;
+    updateProgress();
   }
 });
 
-// Event listener for "Previous" button
+// Previous button functionality
 prevButton.addEventListener('click', () => {
-  if (currentActiveIndex > 0) {
-    currentActiveIndex--;
-    updateCircles();
+  if (currentActive > 1) {
+    currentActive--;
+    updateProgress();
   }
 });
 
-// Initial update to set up the circles and buttons
-updateCircles();
+// Initial progress update
+updateProgress();
