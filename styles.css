@@ -5,45 +5,52 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
   margin: 0;
+  background-color: #f0f0f0;
 }
 
-.progress-bar {
+.progress-container {
   display: flex;
   justify-content: space-between;
-  width: 300px;
-  margin-bottom: 20px;
+  width: 60%;
+  max-width: 500px;
 }
 
 .circle {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background-color: lightgray;
+  background-color: #ccc;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: bold;
+  align-items: center;
   color: white;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
 }
 
-.active {
-  background-color: green;
+.circle.active {
+  background-color: #4caf50;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
 }
 
 button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  margin: 5px;
-  border: none;
-  background-color: #007BFF;
+  background-color: #4caf50;
   color: white;
+  border: none;
   border-radius: 5px;
 }
 
 button:disabled {
-  background-color: gray;
+  background-color: #bbb;
   cursor: not-allowed;
 }
